@@ -1,0 +1,161 @@
+@startuml
+class Hospital{
+-hospitalID: int
+-continent: String
+-land: String
+-city: String
+-adress: String
+-phoneNumber: String
+-isOpen(String Date):bool
+}
+
+class FrontDesk
+
+class FrontDeskEmployee{
+-checkInPatient():void
+-checkOutPatient():void
+-answerPhone():void
+-createInvoice():void
+-listenToComplaints():void
+}
+
+Hospital *-- FrontDesk
+
+
+FrontDesk *-- FrontDeskEmployee
+
+class HospitalStation{
+-stationNumber: int
+-price: float
+-beds: int
+-WLAN: bool
+-cleaned: bool
+-isBookable(dateFrom,dateTo):bool
+-addToInvoice(bill[]):void
+-reservate(dateFrom, dateTo, patientID): Reservation
+}
+
+
+class Reservation{
+-stationNumber:int
+-bookingStartDate: date
+-bookingEndDate: date
+-patientIDs[]: Array
+}
+
+class Person{
+-firstname: String
+-lastname: String
+-street: String
+-city: String
+-country: String
+-phoneNumber: String
+-dateOfBirth: String
+
+}
+
+class Patient{
+-PatientID:int
+-Complaints[]: Array
+-HealthInsurance: String
+-MedicalRecord: String
+-checkIn(station:Station):void
+-checkOut(station:Station):void
+-compain():void
+-payBill():void 
+}
+
+Person <|-- Patient
+Person <|-- Employee
+
+class Employee{
+-employeeID: int
+-department: String
+-position: String
+-hospitalID: int
+-workHours: int
+}
+
+class Doctor{
+-specialization: String
+-years of Experience: int
+}
+
+class MedicalRecord{
+-patientData: String
+-diagnosis: String
+-treatmentHistory: String
+}
+
+class Medication{
+-dosage: String
+-ingredient: String
+-weight: float
+}
+
+class Laboraty{
+-name: String
+-adress: String
+-eqipment: String
+-Employee: String
+-contact: String
+}
+class LabResult{
+-result: String
+-date: date
+}
+
+class Nurse{
+-spezialisation: String
+-position: String
+-suportDoctor(doktor:Doktor):void
+-takeCareof(patient:Patient):void 
+}
+
+Employee <|-- Doctor
+Employee <|-- Nurse
+
+class CleaningStaff{
+-cleanStations():void
+-cleanDepartment():void
+}
+class Cafeteria{
+-seats: int
+-openingHoursStart: String
+-openingHoursEnd: String
+-meal: String
+}
+class Kitchen{
+}
+
+class KitchenStaff{
+-cleanWorkPlace():void
+}
+class Chef{
+prepareMeal(order:Order):void
+orderIngredients():void
+}
+
+class KitchenHelper{
+sellMeal():void
+-washDishes():void
+-prepareIngredients():void
+}
+Cafeteria *-- Kitchen
+Kitchen *-- KitchenStaff
+KitchenStaff <|-- Chef
+KitchenStaff <|-- KitchenHelper
+Employee <|-- CleaningStaff
+Employee <|-- KitchenStaff
+Hospital *-- Cafeteria
+Hospital *-- Laboraty
+Hospital *-- HospitalStation
+HospitalStation *-- Reservation
+Reservation *-- Patient
+Laboraty *-- LabResult
+Laboraty *-- Medication
+Patient *-- MedicalRecord
+Doctor *-- Patient
+Employee <|-- FrontDeskEmployee
+Hospital *-- Employee
+@enduml
